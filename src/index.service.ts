@@ -1,9 +1,7 @@
 // import { Model, Repository } from 'sequelize-typescript';
 import { Service } from "typedi";
 
-// import { sequelize } from '@/config/database';
-import { IService } from "@/interfaces/service.interface";
-// import User from '@/users/user.entity';
+import { IService } from "@src/interfaces/service.interface";
 
 /**
  * Index Service
@@ -14,7 +12,7 @@ import { IService } from "@/interfaces/service.interface";
 class IndexService implements IService {
   // prettier-ignore
   constructor(
-    public readonly repository: any//Repository<Model<User>> = sequelize.getRepository(User),  // temp
+    public readonly repository: any
   ) {}
   public async index(): Promise<any> {
     return { message: "Hello World" };
