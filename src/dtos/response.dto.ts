@@ -28,3 +28,30 @@ export class HttpErrorResponseDto {
   @IsObject()
   public errors?: object;
 }
+
+@JSONSchema({
+  description: 'Base Response dto',
+  example: {
+    httpCode: 200,
+    name: 'OKResponse',
+    message: 'Success Response',
+    data: {}
+  }
+})
+export class HttpResponseDto {
+  @Expose()
+  @IsNumber()
+  public httpCode!: number;
+
+  @Expose()
+  @IsString()
+  public name?: string;
+
+  @Expose()
+  @IsString()
+  public message!: string;
+
+  @Expose()
+  @IsObject()
+  public data?: object;
+}

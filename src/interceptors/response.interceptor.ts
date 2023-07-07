@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Action, HttpError, Interceptor, InterceptorInterface } from 'routing-controllers';
 import { Service } from 'typedi';
 
-import logger from '@/utils/logger.util';
+import logger from '@src/utils/logger.util';
 
 /**
  * @class ResponseInterceptor
