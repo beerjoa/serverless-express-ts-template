@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+
 import ServerlessHttp from 'serverless-http';
 
 import App from '@src/app';

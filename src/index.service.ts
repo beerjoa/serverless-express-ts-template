@@ -1,7 +1,6 @@
-// import { Model, Repository } from 'sequelize-typescript';
-import { Service } from "typedi";
+import { Service } from 'typedi';
 
-import { IService } from "@src/interfaces/service.interface";
+import { IService } from '@src/interfaces/service.interface';
 
 /**
  * Index Service
@@ -15,7 +14,7 @@ class IndexService implements IService {
     public readonly repository: any
   ) {}
   public async index(): Promise<any> {
-    return { message: "Hello World" };
+    return { message: 'Hello World' };
   }
 }
 

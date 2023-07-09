@@ -1,23 +1,18 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
-import { validationMetadatasToSchemas } from "class-validator-jsonschema";
-import compression from "compression";
-import express, { json, urlencoded } from "express";
-import path from "path";
-import {
-  RoutingControllersOptions,
-  getMetadataArgsStorage,
-  useContainer,
-  useExpressServer,
-} from "routing-controllers";
-import { routingControllersToSpec } from "routing-controllers-openapi";
-import swaggerUiExpress from "swagger-ui-express";
-import { Container } from "typedi";
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
+import compression from 'compression';
+import express, { json, urlencoded } from 'express';
+import path from 'path';
+import { getMetadataArgsStorage, RoutingControllersOptions, useContainer, useExpressServer } from 'routing-controllers';
+import { routingControllersToSpec } from 'routing-controllers-openapi';
+import swaggerUiExpress from 'swagger-ui-express';
+import { Container } from 'typedi';
 
-const { defaultMetadataStorage } = require("class-transformer/cjs/storage");
+const { defaultMetadataStorage } = require('class-transformer/cjs/storage');
 
-import config from "@src/config";
-import logger from "@src/utils/logger.util";
+import config from '@src/config';
+import logger from '@src/utils/logger.util';
 
 type TRoutingControllersOptions = RoutingControllersOptions | unknown;
 class App {
@@ -44,71 +39,64 @@ class App {
 
   private initRoutes(): void {
     const routingControllerOptions: Partial<TRoutingControllersOptions> = {
-      routePrefix: "/api",
-      controllers: [
-        path.join(__dirname, "/*.controller.js"),
-        path.join(__dirname, "/**/*.controller.js"),
-      ],
+      routePrefix: '/api',
+      controllers: [path.join(__dirname, '/*.controller.js'), path.join(__dirname, '/**/*.controller.js')],
       // middlewares: [HttpErrorHandler, LoggingHandler],
-      interceptors: [path.join(__dirname, "/interceptors/*.interceptor.ts")],
+      interceptors: [path.join(__dirname, '/interceptors/*.interceptor.js')],
       defaultErrorHandler: false,
       validation: true,
-      classTransformer: true,
+      classTransformer: true
       // authorizationChecker
     };
 
     useExpressServer(this._app, routingControllerOptions);
-    logger.info("Init Routes");
+    logger.info('Init Routes');
 
     this._InitSwagger(routingControllerOptions);
   }
 
-  private _InitSwagger(
-    routingControllerOptions: Partial<RoutingControllersOptions>
-  ): void {
+  private _InitSwagger(routingControllerOptions: Partial<RoutingControllersOptions>): void {
     const storage = getMetadataArgsStorage();
     const schemas = validationMetadatasToSchemas({
       classTransformerMetadataStorage: defaultMetadataStorage,
-      refPointerPrefix: "#/components/schemas/",
+      refPointerPrefix: '#/components/schemas/'
     });
 
     const components = {
       schemas,
       securitySchemes: {
         jwtAuth: {
-          type: "apiKey",
-          scheme: "bearer",
-          name: "Authorization",
-          in: "header",
-          bearerFormat: "JWT",
-        },
-      },
+          type: 'apiKey',
+          scheme: 'bearer',
+          name: 'Authorization',
+          in: 'header',
+          bearerFormat: 'JWT'
+        }
+      }
     };
 
     const additionalProperties = {
       info: {
-        title: "API Documentation",
-        description: "API Documentation",
-        version: config.APP_VERSION,
+        title: 'API Documentation',
+        description: 'API Documentation',
+        version: config.APP_VERSION
       },
       servers: [{ url: this._serverUrl }],
-      components,
+      components
     };
 
     const spec = routingControllersToSpec(
       storage,
       routingControllerOptions,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       additionalProperties
     );
 
-    this.app.use(
-      "/api-docs",
-      swaggerUiExpress.serveWithOptions({ redirect: false })
-    );
-    this.app.get("/api-docs", swaggerUiExpress.setup(spec, { explorer: true }));
+    this.app.use('/api-docs', swaggerUiExpress.serveWithOptions({ redirect: false }));
+    this.app.get('/api-docs', swaggerUiExpress.setup(spec, { explorer: true }));
 
-    logger.info("Init Swagger");
+    logger.info('Init Swagger');
   }
 
   private initMiddleware(): void {

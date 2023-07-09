@@ -13,7 +13,10 @@ const base = {
     {
       http: {
         path: '/api/{proxy+}',
-        method: 'ANY'
+        method: 'ANY',
+        cors: {
+          origin: '*'
+        }
       }
     }
   ]
