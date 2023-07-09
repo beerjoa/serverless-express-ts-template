@@ -1,5 +1,5 @@
+import base from '@functions/base';
 import type { AWS as Serverless } from '@serverless/typescript';
-import base from './functions/base';
 
 const serverlessConfiguration: Serverless = {
   service: 'express-ts-lambda',

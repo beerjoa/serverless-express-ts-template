@@ -1,12 +1,12 @@
 import { Response } from 'express';
 import httpStatus from 'http-status';
 import { Get, HttpCode, HttpError, JsonController, Res } from 'routing-controllers';
+import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 import { Service } from 'typedi';
 
 import { HttpResponseDto } from '@src/dtos/response.dto';
 import IndexService from '@src/index.service';
 import { IController } from '@src/interfaces/controller.interface';
-import { OpenAPI, ResponseSchema } from 'routing-controllers-openapi';
 
 /**
  * Index Controller

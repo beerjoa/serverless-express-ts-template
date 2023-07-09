@@ -5,9 +5,9 @@
       "@src/*": [
         "src/*"
       ],
-      // "@functions/*": [
-      //   "src/functions/*"
-      // ],
+      "@functions/*": [
+        "functions/*"
+      ],
     }
   }
 }
