@@ -1,6 +1,6 @@
 # serverless-express-ts-template
 
-![GitHub Actions Status](https://img.shields.io/github/actions/workflow/status/beerjoa/serverless-express-ts-template/commitlint.yml?branch=main)
+![GitHub Actions Status](https://img.shields.io/github/actions/workflow/status/beerjoa/serverless-express-ts-template/lint-commit-and-test.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/beerjoa/serverless-express-ts-template)
 ![GitHub issues](https://img.shields.io/github/issues/beerjoa/serverless-express-ts-template)
 ![GitHub license](https://img.shields.io/github/license/beerjoa/serverless-express-ts-template)
