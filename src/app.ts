@@ -12,6 +12,7 @@ import { Container } from 'typedi';
 const { defaultMetadataStorage } = require('class-transformer/cjs/storage');
 
 import config from '@src/config';
+import { HttpErrorHandler, LoggingHandler } from '@src/middlewares/handler.middleware';
 import logger from '@src/utils/logger.util';
 
 type TRoutingControllersOptions = RoutingControllersOptions | unknown;
@@ -40,13 +41,12 @@ class App {
   private initRoutes(): void {
     const routingControllerOptions: Partial<TRoutingControllersOptions> = {
       routePrefix: '/api',
-      controllers: [path.join(__dirname, '/*.controller.js'), path.join(__dirname, '/**/*.controller.js')],
-      // middlewares: [HttpErrorHandler, LoggingHandler],
-      interceptors: [path.join(__dirname, '/interceptors/*.interceptor.js')],
+      controllers: [path.join(__dirname, '/*.controller.*'), path.join(__dirname, '/**/*.controller.*')],
+      middlewares: [HttpErrorHandler, LoggingHandler],
+      interceptors: [path.join(__dirname, '/interceptors/*.interceptor.*')],
       defaultErrorHandler: false,
       validation: true,
       classTransformer: true
-      // authorizationChecker
     };
 
     useExpressServer(this._app, routingControllerOptions);
@@ -85,13 +85,9 @@ class App {
       components
     };
 
-    const spec = routingControllersToSpec(
-      storage,
-      routingControllerOptions,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      additionalProperties
-    );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const spec = routingControllersToSpec(storage, routingControllerOptions, additionalProperties);
 
     this.app.use('/api-docs', swaggerUiExpress.serveWithOptions({ redirect: false }));
     this.app.get('/api-docs', swaggerUiExpress.setup(spec, { explorer: true }));

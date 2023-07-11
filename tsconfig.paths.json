@@ -8,6 +8,9 @@
       "@functions/*": [
         "functions/*"
       ],
+      "@tests/*": [
+        "tests/*"
+      ],
     }
   }
 }
