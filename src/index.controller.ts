@@ -17,7 +17,7 @@ import { IController } from '@src/interfaces/controller.interface';
   summary: 'Index',
   description: 'Index Controller'
 })
-@JsonController('/test')
+@JsonController('')
 @Service()
 class IndexController implements IController {
   // prettier-ignore
