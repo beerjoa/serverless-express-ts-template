@@ -52,7 +52,9 @@ class App {
     useExpressServer(this._app, routingControllerOptions);
     logger.info('Init Routes');
 
-    this._InitSwagger(routingControllerOptions);
+    if (config.IS_OFFLINE) {
+      this._InitSwagger(routingControllerOptions);
+    }
   }
 
   private _InitSwagger(routingControllerOptions: Partial<RoutingControllersOptions>): void {

@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
-import { cleanEnv, port, str } from 'envalid';
+import { bool, cleanEnv, port, str } from 'envalid';
 
-// dotenv.config({ path: `.env.${process.env.NODE_ENV || "development"}` });
 dotenv.config({ path: '.env' });
 
 const config = cleanEnv(process.env, {
@@ -9,7 +8,8 @@ const config = cleanEnv(process.env, {
   NODE_ENV: str({ default: 'development' }),
   PORT: port({ default: 3000 }),
   HOST: str({ default: 'localhost' }),
-  SERVER_URL: str({ default: 'http://localhost:3000' })
+  SERVER_URL: str({ default: 'http://localhost:3000' }),
+  IS_OFFLINE: bool({ default: false })
 });
 
 export default config;

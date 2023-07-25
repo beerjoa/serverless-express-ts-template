@@ -1,6 +1,6 @@
 {
   "name": "serverless-express-ts-template",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "serverless.ts",
   "repository": "https://github.com/beerjoa/serverless-express-ts-template.git",
   "author": "Jaeyong Shim <hello@beerjoa.dev>",
@@ -11,7 +11,7 @@
   "scripts": {
     "prepare": "husky install",
     "build": "rimraf .build && tsc",
-    "start": "rimraf .build && NODE_ENV=development sls offline -s dev",
+    "start": "rimraf .build && sls offline -s dev",
     "lint": "eslint . --ext .ts",
     "test:integration": "jest --runInBand --config ./jest.config.ts tests/integration",
     "test:unit": "jest --runInBand --config ./jest.config.ts --testPathPattern",
@@ -25,6 +25,7 @@
     "class-validator": "^0.14.0",
     "class-validator-jsonschema": "^5.0.0",
     "compression": "^1.7.4",
+    "dotenv": "^16.3.1",
     "envalid": "^7.3.1",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
@@ -55,7 +56,6 @@
     "@types/swagger-ui-express": "^4.1.3",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
-    "dotenv": "^16.3.1",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^5.0.0-alpha.2",
